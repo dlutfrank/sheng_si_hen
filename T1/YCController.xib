@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.69999999999999996" contentMode="scaleToFill" id="yJH-3v-9kc" customClass="YCController" customModule="T1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="136" height="312"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaH-Fu-2pX">
+                    <rect key="frame" x="18" y="103" width="100" height="32"/>
+                    <state key="normal" title="全景"/>
+                    <connections>
+                        <action selector="playBtn1:" destination="yJH-3v-9kc" eventType="touchUpInside" id="DMQ-nc-SHD"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SF-2c-0hR">
+                    <rect key="frame" x="18" y="263" width="100" height="32"/>
+                    <state key="normal" title="曲谱"/>
+                    <connections>
+                        <action selector="playBtn5:" destination="yJH-3v-9kc" eventType="touchUpInside" id="mKC-nD-Rpp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dM-Sh-QaY">
+                    <rect key="frame" x="18" y="63" width="100" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="32" id="tPw-TY-FXA"/>
+                    </constraints>
+                    <state key="normal" title="俯视"/>
+                    <connections>
+                        <action selector="playBtn0:" destination="yJH-3v-9kc" eventType="touchUpInside" id="7L5-Sg-M3n"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipb-e7-153">
+                    <rect key="frame" x="18" y="143" width="100" height="32"/>
+                    <state key="normal" title="近景"/>
+                    <connections>
+                        <action selector="playBtn2:" destination="yJH-3v-9kc" eventType="touchUpInside" id="62C-te-pl7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIb-T4-ESN">
+                    <rect key="frame" x="18" y="183" width="100" height="32"/>
+                    <state key="normal" title="左"/>
+                    <connections>
+                        <action selector="playBtn3:" destination="yJH-3v-9kc" eventType="touchUpInside" id="8QU-5V-SGU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2v-u3-b9W">
+                    <rect key="frame" x="18" y="223" width="100" height="32"/>
+                    <state key="normal" title="右"/>
+                    <connections>
+                        <action selector="playBtn4:" destination="yJH-3v-9kc" eventType="touchUpInside" id="Ibz-ZA-lJE"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bI-cb-Cj0">
+                    <rect key="frame" x="8" y="17" width="120" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="SJt-6F-9NQ"/>
+                    </constraints>
+                    <state key="normal" title="跳到教学"/>
+                    <connections>
+                        <action selector="jumpVideoBtn:" destination="yJH-3v-9kc" eventType="touchUpInside" id="qxZ-M5-ETK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="top" secondItem="yIb-T4-ESN" secondAttribute="bottom" constant="8" id="0W4-lB-unU"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="leading" secondItem="Y2v-u3-b9W" secondAttribute="leading" id="3uK-rX-ZLa"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="3w2-Cf-7IF"/>
+                <constraint firstAttribute="trailing" secondItem="8dM-Sh-QaY" secondAttribute="trailing" constant="18" id="3yU-OD-XMp"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="trailing" secondItem="Ipb-e7-153" secondAttribute="trailing" id="4Jv-vW-iFW"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="top" secondItem="8dM-Sh-QaY" secondAttribute="bottom" constant="8" id="82b-AV-jou"/>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="width" secondItem="8dM-Sh-QaY" secondAttribute="width" id="95S-FU-G7n"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="width" secondItem="8dM-Sh-QaY" secondAttribute="width" id="CPW-DR-Yws"/>
+                <constraint firstItem="8dM-Sh-QaY" firstAttribute="top" secondItem="3bI-cb-Cj0" secondAttribute="bottom" constant="8" id="Cdf-Yg-yjg"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="trailing" secondItem="yIb-T4-ESN" secondAttribute="trailing" id="CiK-Lh-Sel"/>
+                <constraint firstItem="8dM-Sh-QaY" firstAttribute="leading" secondItem="yJH-3v-9kc" secondAttribute="leading" constant="18" id="EPD-Od-Aab"/>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="trailing" secondItem="4SF-2c-0hR" secondAttribute="trailing" id="FFC-kn-H4d"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="height" secondItem="8dM-Sh-QaY" secondAttribute="height" id="Gpo-sE-6Ro"/>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="leading" secondItem="4SF-2c-0hR" secondAttribute="leading" id="H62-x4-g8E"/>
+                <constraint firstItem="3bI-cb-Cj0" firstAttribute="centerX" secondItem="8dM-Sh-QaY" secondAttribute="centerX" id="OR2-3D-a6H"/>
+                <constraint firstItem="3bI-cb-Cj0" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="P97-VH-EwX"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="PFg-s2-wbX"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="leading" secondItem="yIb-T4-ESN" secondAttribute="leading" id="PbA-Sy-t7K"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="T3M-1A-Z85"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="trailing" secondItem="Y2v-u3-b9W" secondAttribute="trailing" id="VXm-9n-C45"/>
+                <constraint firstAttribute="trailing" secondItem="3bI-cb-Cj0" secondAttribute="trailing" constant="8" id="Wos-6a-Lfl"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="top" secondItem="Ipb-e7-153" secondAttribute="bottom" constant="8" id="YPF-IJ-uQW"/>
+                <constraint firstItem="4SF-2c-0hR" firstAttribute="width" secondItem="8dM-Sh-QaY" secondAttribute="width" id="aYv-nl-pzv"/>
+                <constraint firstItem="4SF-2c-0hR" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="c87-3y-RRp"/>
+                <constraint firstItem="8dM-Sh-QaY" firstAttribute="leading" secondItem="CaH-Fu-2pX" secondAttribute="leading" id="cLy-r5-4DQ"/>
+                <constraint firstItem="4SF-2c-0hR" firstAttribute="height" secondItem="8dM-Sh-QaY" secondAttribute="height" id="d9X-yB-3cE"/>
+                <constraint firstItem="3bI-cb-Cj0" firstAttribute="top" secondItem="yJH-3v-9kc" secondAttribute="top" constant="17" id="dpI-KY-l5L"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="width" secondItem="8dM-Sh-QaY" secondAttribute="width" id="eze-8X-u0g"/>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="height" secondItem="8dM-Sh-QaY" secondAttribute="height" id="gwr-fg-DKP"/>
+                <constraint firstItem="Y2v-u3-b9W" firstAttribute="centerX" secondItem="yJH-3v-9kc" secondAttribute="centerX" id="jqA-5H-rcH"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="top" secondItem="CaH-Fu-2pX" secondAttribute="bottom" constant="8" id="ljb-K4-Hko"/>
+                <constraint firstItem="8dM-Sh-QaY" firstAttribute="trailing" secondItem="CaH-Fu-2pX" secondAttribute="trailing" id="m86-rE-50m"/>
+                <constraint firstAttribute="bottom" secondItem="4SF-2c-0hR" secondAttribute="bottom" constant="17" id="mu7-ny-9Qg"/>
+                <constraint firstItem="4SF-2c-0hR" firstAttribute="top" secondItem="Y2v-u3-b9W" secondAttribute="bottom" constant="8" id="npg-cu-lGw"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="height" secondItem="8dM-Sh-QaY" secondAttribute="height" id="qOT-Sc-pdu"/>
+                <constraint firstItem="3bI-cb-Cj0" firstAttribute="leading" secondItem="yJH-3v-9kc" secondAttribute="leading" constant="8" id="ugN-nX-4cQ"/>
+                <constraint firstItem="Ipb-e7-153" firstAttribute="width" secondItem="8dM-Sh-QaY" secondAttribute="width" id="uje-ec-2rb"/>
+                <constraint firstItem="CaH-Fu-2pX" firstAttribute="leading" secondItem="Ipb-e7-153" secondAttribute="leading" id="wlf-ve-W7r"/>
+                <constraint firstItem="yIb-T4-ESN" firstAttribute="height" secondItem="8dM-Sh-QaY" secondAttribute="height" id="yiy-mh-bDN"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btn0" destination="8dM-Sh-QaY" id="kQD-Yj-NN7"/>
+                <outlet property="btn1" destination="CaH-Fu-2pX" id="UcE-0m-5wE"/>
+                <outlet property="btn2" destination="Ipb-e7-153" id="vPh-Lq-eed"/>
+                <outlet property="btn3" destination="yIb-T4-ESN" id="e0g-gA-OXn"/>
+                <outlet property="btn4" destination="Y2v-u3-b9W" id="Uvc-x5-1gz"/>
+                <outlet property="btn5" destination="4SF-2c-0hR" id="gcu-r6-Bgc"/>
+                <outlet property="btn6" destination="3bI-cb-Cj0" id="FKN-El-4th"/>
+            </connections>
+            <point key="canvasLocation" x="265" y="-21"/>
+        </view>
+    </objects>
+</document>
