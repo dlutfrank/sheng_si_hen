@@ -3,7 +3,7 @@
 //  T1
 //
 //  Created by gong on 21/03/2017.
-//  Copyright © 2017 Ramunas Jurgilas. All rights reserved.
+//  Copyright © 2018 MTG NACTA. All rights reserved.
 //
 
 import UIKit

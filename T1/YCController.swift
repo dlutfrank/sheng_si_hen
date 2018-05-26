@@ -2,8 +2,8 @@
 //  Controller.swift
 //  T1
 //
-//  Created by gong on 16/02/2017.
-//  Copyright © 2017 Ramunas Jurgilas. All rights reserved.
+//  Created by Rong GONG on 16/02/2017.
+//  Copyright © 2018 MTG NACTA. All rights reserved.
 //
 
 import Foundation
