@@ -12,8 +12,14 @@ import UIKit
 class VerifyResources {
     
     func verify_video(video: Video) -> Bool {
-        let itemURL: String? = Bundle.main.path(forResource: video.name, ofType: ".mp4", inDirectory: "remorse_at_death/"+video.directory+"/"+video.sub_directory)
-        if (itemURL != nil) {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
+        // reach the file by appending the file folder
+        let directory = "remorse_at_death/"+video.directory+"/"+video.sub_directory+"/"
+        
+        let itemURL: URL? = documentsURL.appendingPathComponent(directory+video.name+".mp4")
+        
+        if FileManager.default.fileExists(atPath: (itemURL?.path)!) {
             // FILE AVAILABLE
             return true
         } else {

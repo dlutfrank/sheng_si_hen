@@ -12,6 +12,8 @@ class ChangduanTableViewCell: UITableViewCell {
 
     @IBOutlet weak var changduanNameLabel: UILabel!
     @IBOutlet weak var downloadBtn: UIButton!
+    @IBOutlet weak var downloadProgressView: UIProgressView!
+    @IBOutlet weak var downloadProgressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

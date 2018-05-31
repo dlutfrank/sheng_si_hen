@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,13 +14,13 @@
         <!--Menu Table View Controller-->
         <scene sceneID="dUb-1w-aLb">
             <objects>
-                <tableViewController id="e1T-CS-97M" customClass="MenuTableViewController" customModule="T1" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="e1T-CS-97M" customClass="MenuTableViewController" customModule="sheng_si_hen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qj0-bi-9bK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTableViewCell" id="qRI-Vo-UHJ" customClass="MenuTableViewCell" customModule="T1" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTableViewCell" id="qRI-Vo-UHJ" customClass="MenuTableViewCell" customModule="sheng_si_hen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qRI-Vo-UHJ" id="7O0-Ml-iI1">
@@ -58,13 +59,13 @@
         <!--Video Table View Controller-->
         <scene sceneID="zuf-AG-JQ5">
             <objects>
-                <tableViewController id="J7Y-K6-MDA" customClass="VideoTableViewController" customModule="T1" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="J7Y-K6-MDA" customClass="VideoTableViewController" customModule="sheng_si_hen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="7eu-hr-lyX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChangduanTableViewCell" rowHeight="52" id="W6M-aw-5Mj" customClass="ChangduanTableViewCell" customModule="T1" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChangduanTableViewCell" rowHeight="52" id="W6M-aw-5Mj" customClass="ChangduanTableViewCell" customModule="sheng_si_hen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W6M-aw-5Mj" id="HK3-xA-UFm">
@@ -86,21 +87,38 @@
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                         </button>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ovd-FN-g1E">
+                                            <rect key="frame" x="240" y="24" width="76" height="2"/>
+                                        </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJH-BW-uFu">
+                                            <rect key="frame" x="190" y="15" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="leading" secondItem="HK3-xA-UFm" secondAttribute="leadingMargin" id="FOa-Uh-0RS"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="QvL-cw-GG7" secondAttribute="bottom" constant="-3" id="IVc-2g-3Fq"/>
-                                        <constraint firstItem="Igb-13-rlo" firstAttribute="trailing" secondItem="HK3-xA-UFm" secondAttribute="trailingMargin" id="abB-Sj-M7b"/>
-                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="centerY" secondItem="HK3-xA-UFm" secondAttribute="centerY" id="coh-vw-GcR"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Igb-13-rlo" secondAttribute="bottom" constant="1" id="i86-5y-4eY"/>
-                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="centerY" secondItem="Igb-13-rlo" secondAttribute="centerY" id="iSM-kG-Pjl"/>
+                                        <constraint firstItem="Igb-13-rlo" firstAttribute="trailing" secondItem="HK3-xA-UFm" secondAttribute="trailingMargin" id="6Es-gq-f8H"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Igb-13-rlo" secondAttribute="bottom" constant="1" id="DKy-gg-sPK"/>
+                                        <constraint firstItem="ovd-FN-g1E" firstAttribute="leading" secondItem="KJH-BW-uFu" secondAttribute="trailing" constant="8" symbolic="YES" id="GTf-Hg-TIi"/>
+                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="leading" secondItem="HK3-xA-UFm" secondAttribute="leadingMargin" id="Lvi-8L-9RK"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="QvL-cw-GG7" secondAttribute="bottom" constant="-3" id="NA8-hT-fc7"/>
+                                        <constraint firstItem="KJH-BW-uFu" firstAttribute="centerY" secondItem="ovd-FN-g1E" secondAttribute="centerY" id="XRA-iv-fC5"/>
+                                        <constraint firstItem="Igb-13-rlo" firstAttribute="leading" secondItem="ovd-FN-g1E" secondAttribute="trailing" constant="8" symbolic="YES" id="eom-zH-q1e"/>
+                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="centerY" secondItem="KJH-BW-uFu" secondAttribute="centerY" id="hdT-XZ-sXE"/>
+                                        <constraint firstItem="QvL-cw-GG7" firstAttribute="centerY" secondItem="HK3-xA-UFm" secondAttribute="centerY" id="mqF-AK-ZKZ"/>
+                                        <constraint firstItem="KJH-BW-uFu" firstAttribute="firstBaseline" secondItem="Igb-13-rlo" secondAttribute="firstBaseline" id="rnS-zx-yfe"/>
+                                        <constraint firstItem="Igb-13-rlo" firstAttribute="leading" secondItem="KJH-BW-uFu" secondAttribute="trailing" constant="92" id="rpU-4o-Vaa"/>
+                                        <constraint firstItem="ovd-FN-g1E" firstAttribute="centerY" secondItem="Igb-13-rlo" secondAttribute="centerY" id="tYJ-6C-xh2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="changduanNameLabel" destination="QvL-cw-GG7" id="g3H-7r-gHx"/>
                                     <outlet property="downloadBtn" destination="Igb-13-rlo" id="h7a-Rm-7Vt"/>
+                                    <outlet property="downloadProgressLabel" destination="KJH-BW-uFu" id="ghn-c3-tzX"/>
+                                    <outlet property="downloadProgressView" destination="ovd-FN-g1E" id="5EO-HI-AJs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

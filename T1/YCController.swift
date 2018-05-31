@@ -34,7 +34,8 @@ class YCController: UIView {
                          "teacher": "老师",
                          "student": "学生",
                          "band": "乐队",
-                         "feet": "脚"] as [AnyHashable : String]
+                         "feet": "脚",
+                         "score": "曲谱"] as [AnyHashable : String]
     
     func resetBtnImages(btn_names: Array<String>) {
         self.btn_names = btn_names

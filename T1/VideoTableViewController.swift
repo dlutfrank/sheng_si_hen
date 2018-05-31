@@ -53,6 +53,7 @@ func blurImage(image:UIImage) -> UIImage? {
 
 class VideoTableViewController: UITableViewController {
     
+    // receiving the row segue from previous view
     var row_segue_received: Int?
     
     var directory_name: String?
@@ -78,7 +79,10 @@ class VideoTableViewController: UITableViewController {
     var tag_sender: Int?
     
     let resource_verifier = VerifyResources()
-    
+//    var video_downloader = DownloadVideo()
+    var video_downloader_array = Dictionary<Int, DownloadVideo>()
+    var video_names_array = Dictionary<Int, [String]>()
+
     let back_ground_horizontal = blurImage(image: UIImage(named: "back_ground_horizontal.jpg")!)
     let back_ground_vertical = blurImage(image: UIImage(named: "back_ground_vertical.jpg")!)
     
@@ -216,6 +220,12 @@ class VideoTableViewController: UITableViewController {
         cell.downloadBtn.isUserInteractionEnabled = false
         cell.downloadBtn.setTitleColor(.gray, for: .normal)
         
+        cell.downloadProgressView.isHidden = true
+        cell.downloadProgressView.tag = indexPath.row
+        
+        cell.downloadProgressLabel.isHidden = true
+        cell.downloadProgressLabel.tag = indexPath.row
+        
         let aria_folder_name = Array(jsonResults[indexPath.row].keys)
         let video_array = Array(jsonResults[indexPath.row].values)[0][1] as! Array<Array<String>>
         var video_names = [String]()
@@ -229,16 +239,88 @@ class VideoTableViewController: UITableViewController {
         if !missing_videos.isEmpty {
             cell.downloadBtn.isUserInteractionEnabled = true
             cell.downloadBtn.setTitleColor(self.view.tintColor, for: .normal)
-            cell.isUserInteractionEnabled = false
+            cell.selectionStyle = .none
+            cell.downloadBtn.addTarget(self, action: #selector(downloadBtnClicked), for: .touchUpInside)
         }
         
         return cell
     }
     
+    @objc func downloadBtnClicked(sender: UIButton!) {
+        navigationItem.hidesBackButton = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        let cell = self.tableView.cellForRow(at: indexPath) as! ChangduanTableViewCell
+        if self.video_downloader_array[sender.tag] == nil {
+            self.video_downloader_array[sender.tag] = DownloadVideo()
+        }
+
+        if cell.downloadProgressView.isHidden {
+            let aria_folder_name = Array(jsonResults[indexPath.row].keys)
+            let video_array = Array(jsonResults[indexPath.row].values)[0][1] as! Array<Array<String>>
+            var video_names = [String]()
+            var url = [String]()
+            for v in video_array {
+                video_names += [v[0]+".mp4"]
+                url += ["http://compmusic.upf.edu/nacta/remorse_at_death/"+directory_name!+"/"+aria_folder_name[0]+"/"+v[0]+".mp4"]
+            }
+            video_names_array[indexPath.row] = video_names
+            
+            var finishedTask = 0
+            cell.downloadProgressView.setProgress(0.0, animated: false)
+            cell.downloadProgressView.isHidden = false
+            cell.downloadBtn.setTitle("停止", for: .normal)
+            cell.downloadProgressLabel.isHidden = false
+            cell.downloadProgressLabel.text = "0/"+String(video_names.count)
+            
+            self.video_downloader_array[sender.tag]?.beginDownloadBackground(url: url,
+                                           directory: directory_name!,
+                                           sub_directory: aria_folder_name[0],
+                                           filename: video_names,
+                                           downloadProgressView: cell.downloadProgressView,
+                                           downloadBtn: cell.downloadBtn,
+                                           tasks:video_names.count,
+                                           completionHandler: {
+                                            success in
+                                            if success {
+                                                finishedTask = finishedTask + 1
+                                                let video_number: Int = (self.video_names_array[indexPath.row]?.count)!
+//                                                cell.downloadProgressView.setProgress(Float(finishedTask)/Float(video_number), animated: true)
+                                                cell.downloadProgressLabel.text = String(finishedTask)+"/"+String(video_number)
+                                                if finishedTask == video_number {
+                                                    self.video_downloader_array.removeValue(forKey: sender.tag)
+                                                    cell.downloadProgressView.isHidden = true
+                                                    cell.downloadBtn.setTitle("下载", for: .normal)
+                                                    cell.downloadBtn.isUserInteractionEnabled = false
+                                                    cell.downloadBtn.setTitleColor(.gray, for: .normal)
+                                                    cell.selectionStyle = .gray
+                                                    cell.downloadProgressLabel.isHidden = true
+                                                    if self.video_downloader_array.keys.count == 0 {
+                                                        self.navigationItem.hidesBackButton = false
+                                                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                                    }
+                                                }
+                                            }
+            })
+        } else {
+            self.video_downloader_array[sender.tag]?.cancelDownload( completionHandler: {cancelled in
+                if cancelled {
+                    self.video_downloader_array.removeValue(forKey: sender.tag)
+                    cell.downloadProgressView.isHidden = true
+                    cell.downloadBtn.setTitle("下载", for: .normal)
+                    cell.downloadProgressLabel.isHidden = true
+                    if self.video_downloader_array.keys.count == 0 {
+                        self.navigationItem.hidesBackButton = false
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    }
+                }})
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = self.tableView.cellForRow(at: indexPath)
+        let cell = self.tableView.cellForRow(at: indexPath) as! ChangduanTableViewCell
         
-        if cell?.reuseIdentifier == "ChangduanTableViewCell" {
+        if cell.reuseIdentifier == "ChangduanTableViewCell" && !cell.downloadBtn.isUserInteractionEnabled {
             let aria_folder_name = Array(jsonResults[indexPath.row].keys)
             let video_array = Array(jsonResults[indexPath.row].values)[0][1] as! Array<Array<String>>
             var video_names = [String]()
@@ -372,35 +454,37 @@ class VideoTableViewController: UITableViewController {
     
     func setupPlayer(menu_folder_name: String, aria_folder_name: String, video_names: Array<String>) {
         
-        // reach the file by appending the file folder
-        let directory = "remorse_at_death/"+menu_folder_name+"/"+aria_folder_name
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
-        let mainItemURL: String? = Bundle.main.path(forResource: video_names[0], ofType: ".mp4", inDirectory: directory)
-        self.mainItem = AVPlayer(url: NSURL.fileURL(withPath: mainItemURL!) as URL )
+        // reach the file by appending the file folder
+        let directory = "remorse_at_death/"+menu_folder_name+"/"+aria_folder_name+"/"
+        
+        let mainItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[0]+".mp4")
+        self.mainItem = AVPlayer(url: mainItemURL!)
 
         if video_names.count > 1{
-            let firstItemURL: String? = Bundle.main.path(forResource: video_names[1], ofType: ".mp4", inDirectory: directory)
-            self.firstItem = AVPlayer(url: NSURL.fileURL(withPath: firstItemURL!) as URL )
+            let firstItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[1]+".mp4")
+            self.firstItem = AVPlayer(url: firstItemURL!)
         }
 
         if video_names.count > 2 {
-            let secondItemURL: String? = Bundle.main.path(forResource: video_names[2], ofType: ".mp4", inDirectory: directory)
-            self.secondItem = AVPlayer(url: NSURL.fileURL(withPath: secondItemURL!) as URL )
+            let secondItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[2]+".mp4")
+            self.secondItem = AVPlayer(url: secondItemURL!)
         }
 
         if video_names.count > 3 {
-            let thirdItemURL: String? = Bundle.main.path(forResource: video_names[3], ofType: ".mp4", inDirectory: directory)
-            self.thirdItem = AVPlayer(url: NSURL.fileURL(withPath: thirdItemURL!) as URL )
+            let thirdItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[3]+".mp4")
+            self.thirdItem = AVPlayer(url: thirdItemURL!)
         }
 
         if video_names.count > 4 {
-            let fourthItemURL: String? = Bundle.main.path(forResource: video_names[4], ofType: ".mp4", inDirectory: directory)
-            self.fourthItem = AVPlayer(url: NSURL.fileURL(withPath: fourthItemURL!) as URL )
+            let fourthItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[4]+".mp4")
+            self.fourthItem = AVPlayer(url: fourthItemURL!)
         }
 
         if video_names.count > 5 {
-            let fifthItemURL: String? = Bundle.main.path(forResource: video_names[5], ofType: ".mp4", inDirectory: directory)
-            self.fifthItem = AVPlayer(url: NSURL.fileURL(withPath: fifthItemURL!) as URL )
+            let fifthItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[5]+".mp4")
+            self.fifthItem = AVPlayer(url: fifthItemURL!)
         }
     }
     
