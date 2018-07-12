@@ -10,17 +10,46 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
     
-    var menuItems = ["头面介绍", "化妆介绍", "服装介绍", "身段教学", "便装教学", "带装教学"]
+    var menuItems = ["头面介绍", "化妆介绍", "服装介绍", "身段教学", "便装教学", "带装教学", "文章", "演职人员名单"]
+    
+    let back_ground_horizontal = ImageUtils.blurImage(image: UIImage(named: "back_ground_horizontal.jpg")!)
+    let back_ground_vertical = ImageUtils.blurImage(image: UIImage(named: "back_ground_vertical.jpg")!)
+    
+    private func loadHorizontalBG() {
+        tableView.backgroundView = UIImageView(image: back_ground_horizontal)
+        tableView.backgroundView?.backgroundColor = UIColor .white
+        tableView.backgroundView?.contentMode = .scaleToFill
+    }
+    
+    private func loadVerticalBG() {
+        tableView.backgroundView = UIImageView(image: back_ground_vertical)
+        tableView.backgroundView?.backgroundColor = UIColor .white
+        tableView.backgroundView?.contentMode = .scaleToFill
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            loadHorizontalBG()
+        } else {
+            loadVerticalBG()
+        }
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+                                
+        if  (UIApplication.shared.statusBarOrientation.isLandscape) {
+            loadHorizontalBG()
+        } else {
+            loadVerticalBG()
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,9 +76,9 @@ class MenuTableViewController: UITableViewController {
         
         let item_name = menuItems[indexPath.row]
         
-        cell.menuItemBtn.setTitle(item_name, for: .normal)
+        cell.menuItemLabel.text = item_name
         
-        cell.menuItemBtn.tag = indexPath.row
+        cell.menuItemLabel.tag = indexPath.row
 
         return cell
     }
@@ -58,7 +87,11 @@ class MenuTableViewController: UITableViewController {
         let cell = self.tableView.cellForRow(at: indexPath)
         
         if cell?.reuseIdentifier == "MenuTableViewCell" {
-            self.performSegue(withIdentifier: "showVideoTableView", sender: self)
+            if indexPath.row < 6 {
+                self.performSegue(withIdentifier: "showVideoTableView", sender: self)
+            } else {
+                self.performSegue(withIdentifier: "showWebView", sender: self)
+            }
         }
         
     }
@@ -100,10 +133,24 @@ class MenuTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow{
-            let videoTableVC = segue.destination as! VideoTableViewController
-            videoTableVC.row_segue_received = indexPath.row
+            if indexPath.row < 6 {
+                let videoTableVC = segue.destination as! VideoTableViewController
+                videoTableVC.row_segue_received = indexPath.row
+            } else {
+                let webViewVC = segue.destination as! WebViewController
+                switch indexPath.row {
+                case 6:
+                    webViewVC.url_string = "https://ronggong.github.io/projects/nacta_sheng_si_hen/articles.html"
+                case 7:
+                    webViewVC.url_string = "https://ronggong.github.io/projects/nacta_sheng_si_hen/persons.html"
+                default:
+                    webViewVC.url_string = "https://www.google.com"
+                }
+            }
         }
     }
     
-
+    @IBAction func returnButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

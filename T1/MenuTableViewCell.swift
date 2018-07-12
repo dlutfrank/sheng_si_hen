@@ -10,7 +10,7 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var menuItemBtn: UIButton!
+    @IBOutlet weak var menuItemLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

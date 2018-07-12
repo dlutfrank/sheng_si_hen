@@ -18,11 +18,16 @@
 		E801356F20B6FA370042B72A /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801356E20B6FA370042B72A /* MenuTableViewCell.swift */; };
 		E801357420B7197E0042B72A /* jsons in Resources */ = {isa = PBXBuildFile; fileRef = E801357320B7197E0042B72A /* jsons */; };
 		E810503E20B9E00000C09721 /* DownloadVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E810503D20B9E00000C09721 /* DownloadVideo.swift */; };
+		E8201C0D20E2F959003D2B3F /* WTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8201C0C20E2F959003D2B3F /* WTViewController.swift */; };
 		E82BCBDB207D324900B746DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E82BCBDA207D324900B746DD /* Assets.xcassets */; };
 		E86D63A720B9B22F007B15A9 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D63A620B9B22F007B15A9 /* Video.swift */; };
 		E88CA9172066C72D00EEED15 /* back_ground_horizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E88CA9162066C72D00EEED15 /* back_ground_horizontal.jpg */; };
 		E88CA9192066C84700EEED15 /* back_ground_vertical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E88CA9182066C84600EEED15 /* back_ground_vertical.jpg */; };
+		E8959EEF20C2A808005E3071 /* imageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8959EEE20C2A808005E3071 /* imageUtils.swift */; };
+		E8959EF120C2B76A005E3071 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8959EF020C2B76A005E3071 /* WebViewController.swift */; };
 		E89FC0C72047680300A6F1DF /* VerifyResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89FC0C62047680300A6F1DF /* VerifyResources.swift */; };
+		E8B9193120E62EFE00ED8EEF /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9193020E62EFE00ED8EEF /* PracticeViewController.swift */; };
+		E8B9193B20E673E800ED8EEF /* er_bian_xiang_audio in Resources */ = {isa = PBXBuildFile; fileRef = E8B9193A20E673E800ED8EEF /* er_bian_xiang_audio */; };
 		E8BF912A2082AB1D00F35EAD /* AVPlayerViewController_touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BF91292082AB1D00F35EAD /* AVPlayerViewController_touch.swift */; };
 		E8C6E83620BC350F000D3A3F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6E83520BC350F000D3A3F /* NetworkManager.swift */; };
 		F00157311E83F324003508B4 /* MPMoviePlayerController-Subtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00157301E83F324003508B4 /* MPMoviePlayerController-Subtitles.swift */; };
@@ -46,11 +51,16 @@
 		E801356E20B6FA370042B72A /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		E801357320B7197E0042B72A /* jsons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jsons; sourceTree = "<group>"; };
 		E810503D20B9E00000C09721 /* DownloadVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadVideo.swift; sourceTree = "<group>"; };
+		E8201C0C20E2F959003D2B3F /* WTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WTViewController.swift; sourceTree = "<group>"; };
 		E82BCBDA207D324900B746DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E86D63A620B9B22F007B15A9 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		E88CA9162066C72D00EEED15 /* back_ground_horizontal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back_ground_horizontal.jpg; sourceTree = "<group>"; };
 		E88CA9182066C84600EEED15 /* back_ground_vertical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back_ground_vertical.jpg; sourceTree = "<group>"; };
+		E8959EEE20C2A808005E3071 /* imageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageUtils.swift; sourceTree = "<group>"; };
+		E8959EF020C2B76A005E3071 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E89FC0C62047680300A6F1DF /* VerifyResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyResources.swift; sourceTree = "<group>"; };
+		E8B9193020E62EFE00ED8EEF /* PracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
+		E8B9193A20E673E800ED8EEF /* er_bian_xiang_audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = er_bian_xiang_audio; sourceTree = "<group>"; };
 		E8BF91292082AB1D00F35EAD /* AVPlayerViewController_touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerViewController_touch.swift; sourceTree = "<group>"; };
 		E8C6E83520BC350F000D3A3F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EFD10EBF2945D16DC1ED87B1 /* Pods-sheng_si_hen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sheng_si_hen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sheng_si_hen/Pods-sheng_si_hen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +113,8 @@
 			children = (
 				E801357320B7197E0042B72A /* jsons */,
 				E82BCBDA207D324900B746DD /* Assets.xcassets */,
+				E8B9193A20E673E800ED8EEF /* er_bian_xiang_audio */,
+				E8959EF020C2B76A005E3071 /* WebViewController.swift */,
 				E8C6E83520BC350F000D3A3F /* NetworkManager.swift */,
 				E88CA9162066C72D00EEED15 /* back_ground_horizontal.jpg */,
 				E88CA9182066C84600EEED15 /* back_ground_vertical.jpg */,
@@ -123,6 +135,9 @@
 				E801356C20B6F90D0042B72A /* MenuTableViewController.swift */,
 				E801356E20B6FA370042B72A /* MenuTableViewCell.swift */,
 				E810503D20B9E00000C09721 /* DownloadVideo.swift */,
+				E8959EEE20C2A808005E3071 /* imageUtils.swift */,
+				E8201C0C20E2F959003D2B3F /* WTViewController.swift */,
+				E8B9193020E62EFE00ED8EEF /* PracticeViewController.swift */,
 			);
 			path = T1;
 			sourceTree = "<group>";
@@ -206,6 +221,7 @@
 				30BE052B1CAFC1D4006594FC /* LaunchScreen.storyboard in Resources */,
 				E82BCBDB207D324900B746DD /* Assets.xcassets in Resources */,
 				E88CA9172066C72D00EEED15 /* back_ground_horizontal.jpg in Resources */,
+				E8B9193B20E673E800ED8EEF /* er_bian_xiang_audio in Resources */,
 				E88CA9192066C84700EEED15 /* back_ground_vertical.jpg in Resources */,
 				3039320B1CB18FBA00D0FEC0 /* RJPlayerContorllerView.xib in Resources */,
 				30BE05261CAFC1D4006594FC /* Main.storyboard in Resources */,
@@ -243,10 +259,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-sheng_si_hen/Pods-sheng_si_hen-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -262,7 +280,9 @@
 			files = (
 				F0282E602038F0F900AFE78A /* YCController.swift in Sources */,
 				E8BF912A2082AB1D00F35EAD /* AVPlayerViewController_touch.swift in Sources */,
+				E8B9193120E62EFE00ED8EEF /* PracticeViewController.swift in Sources */,
 				3039320D1CB1905C00D0FEC0 /* RJPlayerContorllerView.swift in Sources */,
+				E8959EEF20C2A808005E3071 /* imageUtils.swift in Sources */,
 				E8C6E83620BC350F000D3A3F /* NetworkManager.swift in Sources */,
 				F001FB861E80F2F900E40853 /* VideoTableViewController.swift in Sources */,
 				30BE05211CAFC1D4006594FC /* AppDelegate.swift in Sources */,
@@ -270,8 +290,10 @@
 				E801356D20B6F90D0042B72A /* MenuTableViewController.swift in Sources */,
 				E86D63A720B9B22F007B15A9 /* Video.swift in Sources */,
 				E801356F20B6FA370042B72A /* MenuTableViewCell.swift in Sources */,
+				E8201C0D20E2F959003D2B3F /* WTViewController.swift in Sources */,
 				E810503E20B9E00000C09721 /* DownloadVideo.swift in Sources */,
 				F00157311E83F324003508B4 /* MPMoviePlayerController-Subtitles.swift in Sources */,
+				E8959EF120C2B76A005E3071 /* WebViewController.swift in Sources */,
 				E89FC0C72047680300A6F1DF /* VerifyResources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,7 +435,7 @@
 				DEVELOPMENT_TEAM = 2NR6HRTZW2;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = T1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.rj.T1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,7 +453,7 @@
 				DEVELOPMENT_TEAM = 2NR6HRTZW2;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = T1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.rj.T1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

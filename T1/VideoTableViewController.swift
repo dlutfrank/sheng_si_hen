@@ -12,45 +12,6 @@ import AVKit
 import MediaPlayer
 //import MPMoviePlayerController-Subtitles
 
-extension UIImage {
-    var noir: UIImage? {
-        let context = CIContext(options: nil)
-        guard let currentFilter = CIFilter(name: "CIPhotoEffectNoir") else { return nil }
-        currentFilter.setValue(CIImage(image: self), forKey: kCIInputImageKey)
-        if let output = currentFilter.outputImage,
-            let cgImage = context.createCGImage(output, from: output.extent) {
-            return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
-        }
-        return nil
-    }
-}
-
-func blurImage(image:UIImage) -> UIImage? {
-    let context = CIContext(options: nil)
-    let inputImage = CIImage(image: image)
-    let originalOrientation = image.imageOrientation
-    let originalScale = image.scale
-    
-    let filter = CIFilter(name: "CIGaussianBlur")
-    filter?.setValue(inputImage, forKey: kCIInputImageKey)
-    filter?.setValue(20.0, forKey: kCIInputRadiusKey)
-    let outputImage = filter?.outputImage
-    
-    var cgImage:CGImage?
-    
-    if let asd = outputImage
-    {
-        cgImage = context.createCGImage(asd, from: (inputImage?.extent)!)
-    }
-    
-    if let cgImageA = cgImage
-    {
-        return UIImage(cgImage: cgImageA, scale: originalScale, orientation: originalOrientation)
-    }
-    
-    return nil
-}
-
 class VideoTableViewController: UITableViewController {
     
     // receiving the row segue from previous view
@@ -82,9 +43,6 @@ class VideoTableViewController: UITableViewController {
 //    var video_downloader = DownloadVideo()
     var video_downloader_array = Dictionary<Int, DownloadVideo>()
     var video_names_array = Dictionary<Int, [String]>()
-
-    let back_ground_horizontal = blurImage(image: UIImage(named: "back_ground_horizontal.jpg")!)
-    let back_ground_vertical = blurImage(image: UIImage(named: "back_ground_vertical.jpg")!)
     
     var aria_names = [String]()
     var jsonResults = Array<Dictionary<String, Array<Any>>>()
@@ -93,6 +51,21 @@ class VideoTableViewController: UITableViewController {
     var observer_switchVideo: NSObjectProtocol!
     var observer_wakeOverlapView: NSObjectProtocol!
     var observer_doneButtonPressed: NSObjectProtocol!
+    
+    let back_ground_horizontal = ImageUtils.blurImage(image: UIImage(named: "back_ground_horizontal.jpg")!)
+    let back_ground_vertical = ImageUtils.blurImage(image: UIImage(named: "back_ground_vertical.jpg")!)
+    
+    private func loadHorizontalBG() {
+        tableView.backgroundView = UIImageView(image: back_ground_horizontal)
+        tableView.backgroundView?.backgroundColor = UIColor .white
+        tableView.backgroundView?.contentMode = .scaleToFill
+    }
+    
+    private func loadVerticalBG() {
+        tableView.backgroundView = UIImageView(image: back_ground_vertical)
+        tableView.backgroundView?.backgroundColor = UIColor .white
+        tableView.backgroundView?.contentMode = .scaleToFill
+    }
     
     private func loadJson(json_resource: String) -> Array<Dictionary<String, Array<Any>>> {
         let ret = Array<Dictionary<String, Array<Any>>>()
@@ -115,21 +88,12 @@ class VideoTableViewController: UITableViewController {
         }
         return aria_names
     }
-    
-    private func loadHorizontalBG() {
-        tableView.backgroundView = UIImageView(image: back_ground_horizontal)
-        tableView.backgroundView?.backgroundColor = UIColor .white
-        tableView.backgroundView?.contentMode = .scaleToFill
-    }
-    
-    private func loadVerticalBG() {
-        tableView.backgroundView = UIImageView(image: back_ground_vertical)
-        tableView.backgroundView?.backgroundColor = UIColor .white
-        tableView.backgroundView?.contentMode = .scaleToFill
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "请在WIFI环境下下载视频"
+        
         if  (UIApplication.shared.statusBarOrientation.isLandscape) {
             loadHorizontalBG()
         } else {
@@ -179,11 +143,11 @@ class VideoTableViewController: UITableViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-                if UIDevice.current.orientation.isLandscape {
-                    loadHorizontalBG()
-                } else {
-                    loadVerticalBG()
-                }
+        if UIDevice.current.orientation.isLandscape {
+            loadHorizontalBG()
+        } else {
+            loadVerticalBG()
+        }
         
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil) { _ in
