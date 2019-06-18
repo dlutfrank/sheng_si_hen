@@ -16,10 +16,14 @@ class VideoTableViewController: UITableViewController {
     
     // receiving the row segue from previous view
     var row_segue_received: Int?
+    var current_play_idx: Int = -1
+    var current_vol: Float?
+    var observerTimeControlStatus = false
     
     var directory_name: String?
     
     var player = AVPlayerViewController_touch()
+    var multiPlayer = AVPlayerViewController_touch()
     
     var YCOverlayView: YCController?
 
@@ -29,6 +33,7 @@ class VideoTableViewController: UITableViewController {
     var thirdItem: AVPlayer?
     var fourthItem: AVPlayer?
     var fifthItem: AVPlayer?
+    var multiItem: AVPlayer?
     
     var timer: Timer?
     var START_TIME: CMTime?
@@ -51,6 +56,8 @@ class VideoTableViewController: UITableViewController {
     var observer_switchVideo: NSObjectProtocol!
     var observer_wakeOverlapView: NSObjectProtocol!
     var observer_doneButtonPressed: NSObjectProtocol!
+    
+    var vc:UIViewController!
     
     let back_ground_horizontal = ImageUtils.blurImage(image: UIImage(named: "back_ground_horizontal.jpg")!)
     let back_ground_vertical = ImageUtils.blurImage(image: UIImage(named: "back_ground_vertical.jpg")!)
@@ -101,7 +108,7 @@ class VideoTableViewController: UITableViewController {
         }
         
         self.timeToJumpBack = 0.0
-        
+        // jump from list
         if row_segue_received == 0 {
             directory_name = "head_face"
         } else if row_segue_received == 1 {
@@ -126,10 +133,20 @@ class VideoTableViewController: UITableViewController {
         
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         
-        player.view.frame = self.view.frame
-        player.view.sizeToFit()
+        let h = self.view.frame.height;
+        
+//        let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: h/2)
+        let multiRect = CGRect(x: 0, y: h/2, width: self.view.frame.width, height: h/2)
+        player.view.frame = self.view.frame;
+//            self.view.frame
+//        player.view.sizeToFit()
         player.showsPlaybackControls = true
-
+        
+        
+        multiPlayer.view.frame = multiRect;
+//        multiPlayer.view.sizeToFit();
+        multiPlayer.showsPlaybackControls = false;
+        multiPlayer.player?.volume = 0;
     }
     
     func doneButtonPressed(notification: Notification) -> Void {
@@ -194,7 +211,9 @@ class VideoTableViewController: UITableViewController {
         let video_array = Array(jsonResults[indexPath.row].values)[0][1] as! Array<Array<String>>
         var video_names = [String]()
         for v in video_array {
-            video_names += [v[0]]
+            if(v[0] != ""){
+                video_names += [v[0]]
+            }
         }
         
         // check if there is missing videos
@@ -224,9 +243,13 @@ class VideoTableViewController: UITableViewController {
             let video_array = Array(jsonResults[indexPath.row].values)[0][1] as! Array<Array<String>>
             var video_names = [String]()
             var url = [String]()
+//            let host = "http://compmusic.upf.edu/nacta/remorse_at_death/";
+            let host = "http://shengsihen.nacta.edu.cn/";
             for v in video_array {
-                video_names += [v[0]+".mp4"]
-                url += ["http://compmusic.upf.edu/nacta/remorse_at_death/"+directory_name!+"/"+aria_folder_name[0]+"/"+v[0]+".mp4"]
+                if(v[0] != ""){
+                    video_names += [v[0]+".mp4"]
+                    url += [host+directory_name!+"/"+aria_folder_name[0]+"/"+v[0]+".mp4"]
+                }
             }
             video_names_array[indexPath.row] = video_names
             
@@ -290,8 +313,12 @@ class VideoTableViewController: UITableViewController {
             var video_names = [String]()
             btn_names = [String]()
             for v in video_array {
-                video_names += [v[0]]
-                btn_names += [v[1]]
+                if(v[0] != ""){
+                    video_names += [v[0]]
+                }
+                if(v[1] != ""){
+                    btn_names += [v[1]]
+                }
             }
             playVideos(aria_folder_name: aria_folder_name[0],
                        video_names: video_names,
@@ -301,7 +328,20 @@ class VideoTableViewController: UITableViewController {
     }
     
     func playVideos(aria_folder_name: String, video_names: Array<String>, btn_names: Array<String>, row_segue: Int) {
-        self.showDetailViewController(player, sender: self)
+        
+        self.vc = UIViewController();
+//        self.vc.view.frame = CGRect(x:0, y:0, width:500, height:500);
+        self.vc.view.backgroundColor = UIColor.white;
+//        player.view.frame = CGRect(x:0, y:0, width:200, height:200);
+//        multiPlayer.view.frame = CGRect(x:0, y:0, width:300, height:300);
+        self.vc.view.addSubview(player.view);
+        
+
+        print(self.vc.childViewControllers);
+//        vc.addChildViewController(multiPlayer);
+        self.showDetailViewController(self.vc, sender: self)
+        player.view.frame = self.view.frame;
+//        self.showDetailViewController(multiPlayer, sender: self)
         
         observer_switchVideo = NotificationCenter.default.addObserver(forName: Notification.Name("switchVideo"),
                                                                       object:nil,
@@ -316,7 +356,7 @@ class VideoTableViewController: UITableViewController {
         observer_doneButtonPressed =  NotificationCenter.default.addObserver(forName: NSNotification.Name.kAVPlayerViewControllerDismissingNotification, object: nil, queue: nil, using: doneButtonPressed)
         
         setupPlayer(menu_folder_name: directory_name!, aria_folder_name: aria_folder_name, video_names: video_names)
-
+        
         if row_segue == 0 { // head face
             playVideos(tag_player: 0)
         } else if row_segue == 1 { // makeup
@@ -449,6 +489,7 @@ class VideoTableViewController: UITableViewController {
         if video_names.count > 5 {
             let fifthItemURL: URL? = documentsURL.appendingPathComponent(directory+video_names[5]+".mp4")
             self.fifthItem = AVPlayer(url: fifthItemURL!)
+            self.multiItem = AVPlayer(url: fifthItemURL!)
         }
     }
     
@@ -516,9 +557,9 @@ class VideoTableViewController: UITableViewController {
             contentOverlayView.resetBtnImages(btn_names: self.btn_names)
             contentOverlayView.layer.cornerRadius = 8
             //grabs the height of your view
-            let theHeight = player.view.frame.size.height
-            let theWidth = player.view.frame.size.width
-            
+            let theHeight = vc.view.frame.size.height
+            let theWidth = vc.view.frame.size.width
+            print("playerView width, height:",theWidth, theHeight)
             var overlay_height = CGFloat(0.0)
             if contentOverlayView.frame.height < theHeight*2.0/3.0 {
                 overlay_height = contentOverlayView.frame.height
@@ -527,6 +568,7 @@ class VideoTableViewController: UITableViewController {
             }
             let overlay_width = contentOverlayView.frame.width
             // set up overlayView frame
+            print("overlay height:", overlay_height)
             contentOverlayView.frame = CGRect(x: theWidth - overlay_width,
                                               y: theHeight/2.0 - overlay_height/2.0 ,
                                               width: overlay_width,
@@ -538,7 +580,8 @@ class VideoTableViewController: UITableViewController {
             Timer.scheduledTimer(withTimeInterval: 7.0, repeats: false) { (timer) in
                 contentOverlayView.removeFromSuperview()
             }
-            player.view.addSubview(contentOverlayView)
+//            player.view.addSubview(contentOverlayView)
+            vc.view.addSubview(contentOverlayView)
         }
     }
 
@@ -556,7 +599,11 @@ class VideoTableViewController: UITableViewController {
         case self.mainItem:
             ycOverlayView.setBtn0Image(image_name: self.btn_names[0])
         case self.firstItem:
-            ycOverlayView.setBtn1Image(image_name: self.btn_names[1])
+            if(current_play_idx == 6){
+                ycOverlayView.setMultiBtnImage(image_name: self.btn_names[6])
+            }else {
+                ycOverlayView.setBtn1Image(image_name: self.btn_names[1])
+            }
         case self.secondItem:
             ycOverlayView.setBtn2Image(image_name: self.btn_names[2])
         case self.thirdItem:
@@ -572,18 +619,25 @@ class VideoTableViewController: UITableViewController {
     
     
     func switchVideoAndPlay(notification: Notification) -> Void {
-        
-        // save current playing time and pause video
-        let timeToResume = player.player?.currentTime()
-//        print("\(timeToResume?.seconds)")
-        player.player?.pause()
-        
-        // unpack notification userInfo, get play item
         guard let userInfo = notification.userInfo,
             let idxVideo = userInfo["idx"] as? Int else {
                 print("No userInfo found.")
                 return
         }
+        if(current_play_idx == idxVideo){
+            print("repeat click")
+            return
+        }
+        // save current playing time and pause video
+        let timeToResume = player.player?.currentTime()
+//        print("\(timeToResume?.seconds)")
+        player.player?.pause()
+        if(current_play_idx == 6){
+            multiPlayer.player?.pause()
+        }
+        
+        // unpack notification userInfo, get play item
+
 
         // switch videos
         switch idxVideo {
@@ -599,11 +653,14 @@ class VideoTableViewController: UITableViewController {
             player.player = self.fourthItem
         case 5:
             player.player = self.fifthItem
+        case 6:
+            player.player = self.firstItem
+            multiPlayer.player = self.multiItem
         default:
             print("\(idxVideo) not exist.")
             return
         }
-                
+        
         // seek to saved play time and play
         player.player?.seek(to: timeToResume!, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
         
@@ -617,10 +674,59 @@ class VideoTableViewController: UITableViewController {
 //        // Change text properties
 //        player.subtitleLabel?.textColor = UIColor.red
         
+        if(idxVideo == 6){
+            multiPlayer.player?.seek(to: timeToResume!, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+            multiPlayer.player?.play()
+            let h = self.view.frame.height;
+            player.view.frame = CGRect(x:0, y:0, width:self.view.frame.width, height:h/2);
+            self.vc.view.addSubview(multiPlayer.view);
+            self.vc.view.sendSubview(toBack: multiPlayer.view)
+            multiPlayer.player?.volume = 0;
+            firstItem?.addObserver(self, forKeyPath: "timeControlStatus", options: .new, context: nil)
+            observerTimeControlStatus=true;
+        }else {
+            if(current_play_idx == 6){
+                multiPlayer.view.removeFromSuperview();
+                player.view.frame = self.view.frame;
+                firstItem?.removeObserver(self, forKeyPath: "timeControlStatus")
+                observerTimeControlStatus=false;
+            }
+        }
         player.player?.play()
-        
 //        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(VideoTableViewController.checkEndingTime), userInfo: nil, repeats: true)
-//        
+//
+        current_play_idx = idxVideo;
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if(current_play_idx != 6){
+            return
+        }
+        if keyPath == "timeControlStatus" {
+            if let v = change![NSKeyValueChangeKey.newKey] as? Int {
+                switch v {
+                case 0:
+                    self.multiPlayer.player?.pause()
+                case 2:
+                    let pt = player.player?.currentTime()
+                    let mt = multiPlayer.player?.currentTime()
+                    if pt != mt {
+                        self.multiPlayer.player?.seek(to: pt ?? kCMTimeZero, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+                    }
+                    self.multiPlayer.player?.play()
+                default:
+                    return
+                }
+                    
+                
+            }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if(observerTimeControlStatus){
+            firstItem?.removeObserver(self, forKeyPath:"timeControlStatus")
+        }
     }
     
     func stopedPlaying() {

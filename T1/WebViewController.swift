@@ -25,6 +25,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         
         let url = URL(string: url_string)
+        print(url);
         let request = URLRequest(url:url!)
         webView.load(request)
 

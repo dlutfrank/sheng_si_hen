@@ -17,6 +17,8 @@ class YCController: UIView {
     @IBOutlet weak var btn3: UIButton!
     @IBOutlet weak var btn4: UIButton!
     @IBOutlet weak var btn5: UIButton!
+    @IBOutlet weak var btnMulti: UIButton!
+    
     
     var color_white = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     var color_orange = UIColor(red: 238.0/255.0, green: 145.0/255.0, blue: 68.0/255.0, alpha: 1.0)
@@ -35,7 +37,9 @@ class YCController: UIView {
                          "student": "学生",
                          "band": "乐队",
                          "feet": "脚",
-                         "score": "曲谱"] as [AnyHashable : String]
+                         "score": "曲谱",
+                         "multi":"分镜",
+        ] as [AnyHashable : String]
     
     func resetBtnImages(btn_names: Array<String>) {
         self.btn_names = btn_names
@@ -96,6 +100,24 @@ class YCController: UIView {
         } else {
             btn5.isHidden = true
         }
+        if(btn_names.count > 6){
+            initBtn(btn: btnMulti, btnName: btn_names[6])
+        } else {
+            btnMulti.isHidden = true
+        }
+    }
+    
+    func initBtn(btn: UIButton, btnName: String) {
+        btn.setTitleColor(color_white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: font_size_unselect)
+        btn.contentHorizontalAlignment = .right
+        btn.contentVerticalAlignment = .bottom
+        btn.setBackgroundImage(UIImage(named: btnName+"_noline"), for: .normal)
+        btn.setTitle(dict_icon_btn[btnName],for: .normal)
+    }
+    
+    func setMultiBtnImage(image_name: String){
+        setBtnImage(btn: btnMulti, image_name: image_name)
     }
     
     func setBtn0Image(image_name: String) {
@@ -106,6 +128,11 @@ class YCController: UIView {
         btn0.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
     }
     
+    @IBAction func playMulti(_ sender: Any) {
+        resetBtnImages(btn_names: self.btn_names)
+        NotificationCenter.default.post(name: Notification.Name("switchVideo"), object: nil,userInfo: ["idx": 6])
+        setBtnImage(btn: btnMulti, image_name: self.btn_names[6]);
+    }
     @IBAction func playBtn0(_ sender: Any) {
         resetBtnImages(btn_names: self.btn_names)
         
@@ -170,12 +197,12 @@ class YCController: UIView {
         setBtn3Image(image_name: self.btn_names[3])
     }
     
-    func setBtn4Image(image_name: String) {
-        btn4.setTitleColor(color_orange, for: .normal)
-        btn4.titleLabel?.font = UIFont.systemFont(ofSize: font_size_select)
-        btn4.contentHorizontalAlignment = .right
-        btn4.contentVerticalAlignment = .top
-        btn4.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
+    func setBtnImage(btn: UIButton, image_name: String){
+        btn.setTitleColor(color_orange, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: font_size_select)
+        btn.contentHorizontalAlignment = .right
+        btn.contentVerticalAlignment = .top
+        btn.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
     }
     
     @IBAction func playBtn4(_ sender: Any) {
@@ -185,16 +212,32 @@ class YCController: UIView {
                                         object: nil,
                                         userInfo: ["idx":4])
         
-        setBtn4Image(image_name: self.btn_names[4])
+//        setBtn4Image(image_name: self.btn_names[4])
+        setBtnImage(btn: self.btn4, image_name: self.btn_names[4]);
+    }
+    
+    func setBtn4Image(image_name: String){
+        setBtnImage(btn: btn4, image_name: image_name)
     }
     
     func setBtn5Image(image_name: String){
-        btn5.setTitleColor(color_orange, for: .normal)
-        btn5.titleLabel?.font = UIFont.systemFont(ofSize: font_size_select)
-        btn5.contentHorizontalAlignment = .right
-        btn5.contentVerticalAlignment = .top
-        btn5.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
+        setBtnImage(btn: btn5, image_name: image_name)
     }
+//    func setBtn4Image(image_name: String) {
+//        btn4.setTitleColor(color_orange, for: .normal)
+//        btn4.titleLabel?.font = UIFont.systemFont(ofSize: font_size_select)
+//        btn4.contentHorizontalAlignment = .right
+//        btn4.contentVerticalAlignment = .top
+//        btn4.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
+//    }
+//
+//    func setBtn5Image(image_name: String){
+//        btn5.setTitleColor(color_orange, for: .normal)
+//        btn5.titleLabel?.font = UIFont.systemFont(ofSize: font_size_select)
+//        btn5.contentHorizontalAlignment = .right
+//        btn5.contentVerticalAlignment = .top
+//        btn5.setBackgroundImage(UIImage(named: image_name+"_line"), for: .normal)
+//    }
     
     @IBAction func playBtn5(_ sender: Any) {
         resetBtnImages(btn_names: self.btn_names)
@@ -202,8 +245,8 @@ class YCController: UIView {
         NotificationCenter.default.post(name:Notification.Name("switchVideo"),
                                         object: nil,
                                         userInfo: ["idx":5])
-        
-        setBtn5Image(image_name: self.btn_names[5])
+        setBtnImage(btn: self.btn5, image_name: self.btn_names[5])
+//        setBtn5Image(image_name: self.btn_names[5])
     }
     
     @IBAction func jumpVideoBtn(_ sender: Any) {
