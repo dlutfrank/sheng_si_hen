@@ -14,6 +14,7 @@
 		30BE05261CAFC1D4006594FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BE05241CAFC1D4006594FC /* Main.storyboard */; };
 		30BE052B1CAFC1D4006594FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BE05291CAFC1D4006594FC /* LaunchScreen.storyboard */; };
 		30BE05331CAFD8F0006594FC /* YCController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30BE05321CAFD8F0006594FC /* YCController.xib */; };
+		8C53B0E922BC767700EA3141 /* LRCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B0E822BC767700EA3141 /* LRCView.swift */; };
 		E801356D20B6F90D0042B72A /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801356C20B6F90D0042B72A /* MenuTableViewController.swift */; };
 		E801356F20B6FA370042B72A /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801356E20B6FA370042B72A /* MenuTableViewCell.swift */; };
 		E801357420B7197E0042B72A /* jsons in Resources */ = {isa = PBXBuildFile; fileRef = E801357320B7197E0042B72A /* jsons */; };
@@ -47,6 +48,7 @@
 		30BE05321CAFD8F0006594FC /* YCController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YCController.xib; sourceTree = "<group>"; };
 		3CDC46065BBF9CB22D1F88DF /* Pods-sheng_si_hen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sheng_si_hen.release.xcconfig"; path = "Pods/Target Support Files/Pods-sheng_si_hen/Pods-sheng_si_hen.release.xcconfig"; sourceTree = "<group>"; };
 		4A7C5B6DE2206334E36860CA /* Pods_sheng_si_hen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sheng_si_hen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C53B0E822BC767700EA3141 /* LRCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRCView.swift; sourceTree = "<group>"; };
 		E801356C20B6F90D0042B72A /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		E801356E20B6FA370042B72A /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		E801357320B7197E0042B72A /* jsons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jsons; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				F0282E5F2038F0F900AFE78A /* YCController.swift */,
 				3039320A1CB18FBA00D0FEC0 /* RJPlayerContorllerView.xib */,
 				3039320C1CB1905C00D0FEC0 /* RJPlayerContorllerView.swift */,
+				8C53B0E822BC767700EA3141 /* LRCView.swift */,
 				F001FB831E80EFB700E40853 /* ChangduanTableViewCell.swift */,
 				F001FB851E80F2F900E40853 /* VideoTableViewController.swift */,
 				E89FC0C62047680300A6F1DF /* VerifyResources.swift */,
@@ -308,6 +311,7 @@
 				E8C6E83620BC350F000D3A3F /* NetworkManager.swift in Sources */,
 				F001FB861E80F2F900E40853 /* VideoTableViewController.swift in Sources */,
 				30BE05211CAFC1D4006594FC /* AppDelegate.swift in Sources */,
+				8C53B0E922BC767700EA3141 /* LRCView.swift in Sources */,
 				F001FB841E80EFB700E40853 /* ChangduanTableViewCell.swift in Sources */,
 				E801356D20B6F90D0042B72A /* MenuTableViewController.swift in Sources */,
 				E86D63A720B9B22F007B15A9 /* Video.swift in Sources */,
